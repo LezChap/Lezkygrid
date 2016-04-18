@@ -1,0 +1,33 @@
+name: lezkygrid
+Author: LezChap
+Description: A SkyGrid Plugin
+version: 1.0
+main: net.lez.skygrid.Main
+load: startup
+loadbefore: [Multiverse-Core]
+prefix: LeZkyGrid
+
+commands:
+  skygrid:
+    description: Access to all the skygrid features, use /skygrid help for more info.
+    aliases: [sg, lezkygrid, lezskygrid]
+    usage: |
+      /<command> help (currently not implemented)
+      /<command> home --if only home is labeled "home", teleports you there, otherwise lists homes.
+      /<command> home <label> --teleports you to the labeled home location.
+      /<command> randomLoc --Teleports you to a random block in the configurated radius.  This location will be solid, but may still hurt you (ex: cactus).
+      /<command> spawn -- Teleports you to Skygrid's world spawn.
+      /<command> sethome --if no homes are set, creates a home labeled "home"
+      /<command> sethome <label> --Sets a home to the given label.
+      /<command> delhome <label> --removes home with the given label from your homes.
+  sgadmin: 
+    description: skygrid admin commands.
+    aliases: [sga, lezkygridadmin, lezskygridadmin]
+    usage: |
+      /<command> (SaveChest|SaveBrewStand) (Common|Uncommon|Rare)
+          Saves the contents of the chest you're looking at to the referenced Loot Table.
+      /<command> LoadChest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
+          Loads the referenced loot table into the chest you're looking at.  WARNING: Current chest contents will be deleted!
+      /<command> reload --Reloads configs from file.
+      /<command> resetconfigs --Resets all config files to defaults
+      /<command> setspawn --Sets the Skygrid world spawn to where you're standing.

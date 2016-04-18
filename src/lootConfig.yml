@@ -1,0 +1,436 @@
+ChestLoot:
+  Rare:
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_SPADE
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_AXE
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_HOE
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_CHESTPLATE
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_SWORD
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        PROTECTION_FALL: 4
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        MENDING: 1
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        LOOT_BONUS_BLOCKS: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_LEGGINGS
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeAIy8zJSUxPLWJgAADlEwUxIAAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_APPLE
+    damage: 1
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        DURABILITY: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        SILK_TOUCH: 1
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+    meta:
+      ==: ItemMeta
+      meta-type: ENCHANTED
+      stored-enchants:
+        DIG_SPEED: 5
+  Uncommon:
+  - ==: org.bukkit.inventory.ItemStack
+    type: SPONGE
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLD_BLOCK
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_SWORD
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_AXE
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_PICKAXE
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_SPADE
+  - ==: org.bukkit.inventory.ItemStack
+    type: REDSTONE_BLOCK
+  - ==: org.bukkit.inventory.ItemStack
+    type: OBSIDIAN
+    amount: 4
+  - ==: org.bukkit.inventory.ItemStack
+    type: BOOKSHELF
+    amount: 2
+  - ==: org.bukkit.inventory.ItemStack
+    type: TNT
+    amount: 2
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_BLOCK
+    amount: 2
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    amount: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_HELMET
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_CHESTPLATE
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_HOE
+  - ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+    amount: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_PICKAXE
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_BOOTS
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_HELMET
+  - ==: org.bukkit.inventory.ItemStack
+    type: CHORUS_FRUIT
+    amount: 6
+  - ==: org.bukkit.inventory.ItemStack
+    type: MAGMA_CREAM
+  - ==: org.bukkit.inventory.ItemStack
+    type: BLAZE_POWDER
+  - ==: org.bukkit.inventory.ItemStack
+    type: FERMENTED_SPIDER_EYE
+    amount: 2
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_LEGGINGS
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_BOOTS
+  - ==: org.bukkit.inventory.ItemStack
+    type: INK_SACK
+    damage: 3
+    amount: 6
+  Common:
+  - ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+    amount: 16
+  - ==: org.bukkit.inventory.ItemStack
+    type: COBBLESTONE
+    amount: 32
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIRT
+    amount: 32
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG
+    damage: 1
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG
+    damage: 2
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG
+    damage: 3
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG_2
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: LOG_2
+    damage: 1
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: NETHERRACK
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: GRASS
+    amount: 4
+  - ==: org.bukkit.inventory.ItemStack
+    type: BRICK
+    amount: 6
+  - ==: org.bukkit.inventory.ItemStack
+    type: COAL
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLD_INGOT
+    amount: 4
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_INGOT
+    amount: 6
+  - ==: org.bukkit.inventory.ItemStack
+    type: REDSTONE
+    amount: 16
+  - ==: org.bukkit.inventory.ItemStack
+    type: QUARTZ
+    amount: 16
+  - ==: org.bukkit.inventory.ItemStack
+    type: BONE
+    amount: 8
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR_CANE
+    amount: 6
+  - ==: org.bukkit.inventory.ItemStack
+    type: GRILLED_PORK
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_BEEF
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_CHICKEN
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_MUTTON
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_RABBIT
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: BREAD
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: CARROT_ITEM
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_CARROT
+    amount: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: APPLE
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLDEN_APPLE
+    amount: 2
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKIE
+    amount: 12
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTATO_ITEM
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: SEEDS
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: PUMPKIN_SEEDS
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: MELON_SEEDS
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: CACTUS
+    amount: 6
+  - ==: org.bukkit.inventory.ItemStack
+    type: BEETROOT_SEEDS
+    amount: 5
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_FISH
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: COOKED_FISH
+    damage: 1
+    amount: 10
+  SpawnEgg:
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWANzyxJzmBgAACRU5mTHQAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeBwzUtJLcpNzGNgAAB2vyyKIAAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeAMyEyPys9NykxlYAAAHOM0OiEAAAA=
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWANzsnMTWVgAABiUWxHHQAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWCLys9NykxlYAAAb93Yex4AAAA=
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWALLshMSS1iYAAAmJdvsh4AAAA=
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeAIzk7NSS3Jz2NgAAA4/sUgIAAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWB3LkpNLUgtYmAAAGXHBBMfAAAA
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWALSkxKyixhYAAAFcawFB4AAAA=
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeAIy8zJSUxPLWJgAADlEwUxIAAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYeD2LS3OKMrPz3XOL2dgAADFQ0VuIwAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWAJz89JY2AAAIves4gcAAAA
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWB3zshMzk7NY2AAAGifiu0fAAAA
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWB2zi9nYAAAtJxfHxsAAAA=
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWANzkhNLWBgAAABt1TGHQAAAA==
+  - ==: org.bukkit.inventory.ItemStack
+    type: MONSTER_EGG
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      internal: H4sIAAAAAAAAAONiYOBi4HTNK8ksqQxJTOdgYMpMYWAOyExnYAAASo1SARsAAAA=
+BrewingStandLoot:
+  Rare:
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: healing
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: strength
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: swiftness
+  - ==: org.bukkit.inventory.ItemStack
+    type: RABBIT_FOOT
+    amount: 3
+  Uncommon:
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: water
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: water
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: night_vision
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: long_poison
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: long_regeneration
+  - ==: org.bukkit.inventory.ItemStack
+    type: BLAZE_POWDER
+    amount: 9
+  Common:
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: water
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: water
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: water
+  - ==: org.bukkit.inventory.ItemStack
+    type: NETHER_STALK
+    amount: 10
+  - ==: org.bukkit.inventory.ItemStack
+    type: POTION
+    meta:
+      ==: ItemMeta
+      meta-type: POTION
+      potion-type: leaping
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    amount: 10

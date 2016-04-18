@@ -1,0 +1,181 @@
+## Name of the world.  Currently doesn't auto-generate, but plan for it to.
+WorldName: skygrid
+## How high will blocks spawn to?
+WorldGenHeight: 65
+
+## Will create a random starting point within this many blocks of origin
+## (If x: 750, z: 750, then it will pick a random spawn between -750, -750 and 750, 750)
+SpawnRadius:
+    x: 750
+    z: 750
+## Will pick a spawn elevation between these coordinates.
+SpawnHeights:
+    Min: 45
+    Max: 65
+
+## This is how many homes players can set via the mod.    
+MaxHomes: 3
+
+## BlockLists are a list of blocks of each rarity, based on Spigot's Material Enums 
+## (https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
+## Every listed item must be a placeable block that matches the Enum, or it
+## will be bypassed for generation.  Anything with a data value needs to be in
+## quotations.  Chests will face random a direction unless you include BlockData (":#").
+BlockLists:
+  Common: 
+    - Grass
+    - Dirt
+    - Stone
+    - Sand 
+    - Log
+    - 'Log:1'
+    - 'Log:2'
+    - 'Log:3'
+    - Log_2
+    - 'Log_2:1'
+    - Coal_Ore
+  Uncommon: 
+    - 'Stone:1'
+    - 'Stone:3'
+    - 'Stone:5'
+    - Mossy_Cobblestone
+    - Iron_Ore
+    - Sandstone
+    - Netherrack
+    - Gravel
+    - Clay
+    - 'Sand:1'
+  Rare: 
+    - Pumpkin
+    - Melon_Block
+    - Redstone_Ore
+    - Lapis_Ore
+    - Web
+    - Gold_Ore
+    - Wool
+    - Obsidian
+    - Quartz_Ore
+    - Brick
+    - Nether_Brick
+    - Glass
+    - Snow_Block
+  Epic: 
+    - TNT
+    - Bookshelf
+    - Mycel
+    - 'dirt:2'
+    - Emerald_Ore
+    - Diamond_Ore
+    - Mob_Spawner
+    - Glowstone
+    - Soul_Sand
+    - Quartz_Block
+    - Stationary_Water
+    - Stationary_Lava
+    - Chest
+    - Ender_Stone
+    - Prismarine
+    - Packed_Ice
+  Legendary: 
+    - Diamond_Block
+    - Gold_Block
+    - Emerald_Block
+    - Lapis_Block
+    - Enchantment_Table
+    - Brewing_Stand
+    - Redstone_Block
+    - Iron_Block
+    - Sponge
+    - Purpur_Block
+
+## Just like the old UltimateSkyGrid Plugin, I create a random number from 0 to 10,000.
+## If the number is smaller than the Chance listed below, it will spawn a block
+## from that list pulled from that group above.
+Chances:
+  Uncommon: 4000
+  Rare: 1800
+  Epic: 180
+  Legendary: 5
+
+## Cances are in percentages (out of 100), processed similarly to blocks above.
+## Loot List in alternate config file: containerConfig.yml.
+## 
+BrewingStandChances:
+    Uncommon: 25
+    Rare: 13
+    SecondItemChance: 15 
+    ThirdItemChance: 0
+  
+## Will spawn 0 to NumItems + 1 Items from the spawn list into the chest, running a new 
+## quality check for each item. HighItemChance is the percentage chance (out of 100) that 
+## it'll run the NumItemsHigh figure.  Loot Lists in alternate config file:
+## containterConfig.yml.
+ChestChances:
+    Uncommon: 10 
+    Rare: 3
+    NumItemsLow: 4
+    NumItemsHigh: 10
+    HighItemChance: 50
+
+## Chest and Brewing Stand loot quantities (over 1) is normalized using these figures.
+Normalized:
+    Dev: 3           ## 70% of values will be within this deviation, 95% within 2xDeviation
+    Mean: 1.35       ## qty/mean is where this curve will focus on.  Ex: qty 16 and Mean 1.6 will
+                     ## Ex: qty 16, Mean 1.35, and Dev 3 will place 70% of results between ~9 and 15
+
+DecoChances:
+    Grass: 25             ## Flower, tallgrass
+    Dirt: 10              ## Sapling, shrubs
+    Sand: 10              ## Cactus, deadbush
+    MossyCobblestone: 10  ## Mushroom, Vines
+    Netherrack: 5         ## FIRAH!
+    Wool: 30              ## Colors/dyed
+    Mycellium: 20         ## Mushrooms
+    SoulSand: 10          ## Netherwart
+    Water: 20             ## Lilypads
+
+## List of mobs for mob spawners.  You can find a list of valid entities at the following URL:
+## https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+## Similar system to selecting blocks for worlgen at the top of config.
+SpawnerMobs:
+  Passive:
+    Common:
+      - Sheep
+      - Chicken
+      - Rabbit
+    Rare:
+      - Pig
+      - Cow
+      - Horse
+    Epic:
+      - Mushroom_Cow
+      - Villager
+  Hostile:
+    Common:
+      - Zombie
+      - Spider
+      - Cave_Spider
+    Rare:
+      - Skeleton
+      - Pig_Zombie
+      - Slime
+      - Magma_Cube
+    Epic:
+      - Blaze
+      - Ghast
+      - Creeper
+      - Enderman
+      - Witch
+
+## Chances to set a spawner to the mob in the list, out of 100 (in percent).  Will first
+## check Hostile chance then passive chance of each Rarity...if none make the cut, it uses
+## the Passive Common list.  Proccessed in order (makes a seperate chance roll each check):
+## (Hostile Epic, Passive Epic, Hostile Rare, Passive Rare, Hostile Common, Passive Common)
+SpawnerChances: 
+  Passive: 
+    Rare: 15
+    Epic: 5
+  Hostile: 
+    Common: 15
+    Rare: 10
+    Epic: 2
