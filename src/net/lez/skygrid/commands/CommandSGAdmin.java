@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.command.Command;
@@ -31,9 +34,82 @@ public class CommandSGAdmin implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command.");
-            return true;
+            if (args.length < 1) {
+                sender.sendMessage("Not enough arguements, check syntax and try again.");
+                return false;
+            }
+            
+            if (args[0].equalsIgnoreCase("reload")) {
+                plugin.loadConfigs();
+                sender.sendMessage("Configs Reloaded!");
+                return true;
+            }
+            
+            if (args[0].equalsIgnoreCase("resetconfigs")) {
+                plugin.resetToDefaults();
+                sender.sendMessage("Configs reset to default, and reloaded!");
+                return true;
+            }
+            
+            if (args.length < 2) {
+                sender.sendMessage("Not enough arguments, check syntax and try again.");
+                return false;
+            }
+            
+            Player p = plugin.getServer().getPlayer(args[1]);
+            if ((p == null) || !p.isOnline()) {
+                sender.sendMessage("Player offline or otherwise invalid.");
+                return true;
+            }
+            
+            if (args[0].equalsIgnoreCase("spawn")) {
+                sender.sendMessage("Teleporting " + p.getName() + " to SkyGrid's world spawn.");
+                p.sendMessage("Server console was directed to teleport you to the SkyGrid world's spawn.");
+                World world = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName"));
+                if (!world.isChunkLoaded(world.getSpawnLocation().getChunk())) {
+                    world.loadChunk(world.getSpawnLocation().getChunk());
+                }
+                p.teleport(world.getSpawnLocation());
+                return true;
+            }
+            
+            if (args[0].equalsIgnoreCase("randomLoc")) {
+                Location spawn = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName")).getSpawnLocation();
+                Random rand = new Random();
+                int xDist = rand.nextInt(Math.round((plugin.getConfig().getInt("SpawnRadius.x") / 4)));
+                int zDist = rand.nextInt(Math.round(plugin.getConfig().getInt("SpawnRadius.z") / 4));
+                double yCoord = (double) (plugin.getConfig().getInt("SpawnHeight.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeight.Max") - plugin.getConfig().getInt("SpawnHeight.Min")));
+                if (rand.nextBoolean()) { xDist = -xDist; }
+                if (rand.nextBoolean()) { zDist = -zDist; }
+                xDist = xDist * 4;
+                zDist = zDist * 4;
+                Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist, yCoord, (double) spawn.getBlockZ() + zDist);
+                loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
+                for (int i = 0; i < 8; i++) {
+                    Block testBlock = loc.getBlock().getRelative(BlockFace.DOWN);
+                    if (testBlock.isEmpty() || testBlock.isLiquid()) {
+                        loc.setY(loc.getY() + 1);
+                    } else {
+                        break;
+                    }
+                }
+                Block b = loc.getBlock().getRelative(BlockFace.DOWN);
+                if (b.isEmpty() || b.isLiquid()) {
+                    sender.sendMessage("Could not find a solid teleport location.  Please try again.");
+                    return true;
+                }
+                sender.sendMessage("Finding and teleporting " + p.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
+                p.sendMessage("Server console was directed to teleport you to a random block in the SkyGrid world.");
+                if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
+                    loc.getWorld().loadChunk(loc.getChunk());
+                }
+                p.teleport(loc);
+                return true;
+            }
+            sender.sendMessage("Invalid command, only the following sub-commands are available on the console: randomLoc, reload, resetconfigs, and spawn.");
+            return false;
         }
+        
         Player p = (Player) sender;
         if (args.length < 1) {
             sender.sendMessage("Not enough arguments, check syntax and try again.");
@@ -55,11 +131,13 @@ public class CommandSGAdmin implements CommandExecutor {
         if (args[0].equalsIgnoreCase("reload")) {
             plugin.loadConfigs();
             sender.sendMessage("Configs Reloaded!");
+            return true;
         }
         
         if (args[0].equalsIgnoreCase("resetconfigs")) {
             plugin.resetToDefaults();
             sender.sendMessage("Configs reset to default, and reloaded!");
+            return true;
         }
         
         /*if (args[0].equalsIgnoreCase("testegg")) {
@@ -82,8 +160,63 @@ public class CommandSGAdmin implements CommandExecutor {
         if (args.length < 2) {
             sender.sendMessage("Not enough arguments, check syntax and try again.");
             return false;
+        }        
+        
+        if (args[0].equalsIgnoreCase("spawn")) {
+            Player p2 = plugin.getServer().getPlayer(args[1]);
+            if ((p2 == null) || !p2.isOnline()) {
+                sender.sendMessage("Player offline or otherwise invalid.");
+                return true;
+            }
+            sender.sendMessage("Teleporting " + p2.getName() + " to SkyGrid's world spawn.");
+            p2.sendMessage("SkyGrid Admin directed to teleport you to the SkyGrid world's spawn.");
+            World world = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName"));
+            if (!world.isChunkLoaded(world.getSpawnLocation().getChunk())) {
+                world.loadChunk(world.getSpawnLocation().getChunk());
+            }
+            p2.teleport(world.getSpawnLocation());
+            return true;
         }
         
+        if (args[0].equalsIgnoreCase("randomLoc")) {
+            Player p2 = plugin.getServer().getPlayer(args[1]);
+            if ((p2 == null) || !p2.isOnline()) {
+                sender.sendMessage("Player offline or otherwise invalid.");
+                return true;
+            }
+            Location spawn = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName")).getSpawnLocation();
+            Random rand = new Random();
+            int xDist = rand.nextInt(Math.round((plugin.getConfig().getInt("SpawnRadius.x") / 4)));
+            int zDist = rand.nextInt(Math.round(plugin.getConfig().getInt("SpawnRadius.z") / 4));
+            double yCoord = (double) (plugin.getConfig().getInt("SpawnHeight.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeight.Max") - plugin.getConfig().getInt("SpawnHeight.Min")));
+            if (rand.nextBoolean()) { xDist = -xDist; }
+            if (rand.nextBoolean()) { zDist = -zDist; }
+            xDist = xDist * 4;
+            zDist = zDist * 4;
+            Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist, yCoord, (double) spawn.getBlockZ() + zDist);
+            loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
+            for (int i = 0; i < 8; i++) {
+                Block testBlock = loc.getBlock().getRelative(BlockFace.DOWN);
+                if (testBlock.isEmpty() || testBlock.isLiquid()) {
+                    loc.setY(loc.getY() + 1);
+                } else {
+                    break;
+                }
+            }
+            Block b = loc.getBlock().getRelative(BlockFace.DOWN);
+            if (b.isEmpty() || b.isLiquid()) {
+                sender.sendMessage("Could not find a solid teleport location.  Please try again.");
+                return true;
+            }
+            sender.sendMessage("Finding and teleporting " + p2.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
+            p2.sendMessage("SkyGrid Admin directed to teleport you to a random block in the SkyGrid world.");
+            if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
+                loc.getWorld().loadChunk(loc.getChunk());
+            }
+            p2.teleport(loc);
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("savechest")) {
             String path = "ChestLoot.";
             switch(args[1].toUpperCase()) {
@@ -114,6 +247,7 @@ public class CommandSGAdmin implements CommandExecutor {
                 sender.sendMessage("Not looking at a chest, cannot save anything!");
             }
             return true;
+            
         } else if (args[0].equalsIgnoreCase("savebrewstand")) {
             String path = "BrewingStandLoot.";
             switch(args[1].toUpperCase()) {
@@ -143,6 +277,7 @@ public class CommandSGAdmin implements CommandExecutor {
             return true;
             
         }
+        
         if (args.length < 3) {
             sender.sendMessage("Not enough arguments, check syntax and try again.");
             return false;

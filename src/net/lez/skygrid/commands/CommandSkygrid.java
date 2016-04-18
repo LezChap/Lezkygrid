@@ -29,8 +29,8 @@ public class CommandSkygrid implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command.");
-            return true;
+            sender.sendMessage("Invalid command, this command cannot be run from the console.");
+            return false;
         }
         
         Player p = (Player) sender;
@@ -160,6 +160,7 @@ public class CommandSkygrid implements CommandExecutor {
                     return true;
                 } else if (plugin.getPlayers().getHomeCount(p.getUniqueId()) < 1) {
                     sender.sendMessage("Do you have any homes?  I can't find any!");
+                    return true;
                 } else {
                     sender.sendMessage(args[1] + " is not a valid home location, please try again.");
                     sender.sendMessage("List of homes: " + plugin.getPlayers().getHomeList(p.getUniqueId()));

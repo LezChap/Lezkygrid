@@ -9,7 +9,7 @@ prefix: LeZkyGrid
 
 commands:
   skygrid:
-    description: Access to all the skygrid features, use /skygrid help for more info.
+    description: Access to all the skygrid player features, use /skygrid help for more info.
     aliases: [sg, lezkygrid, lezskygrid]
     usage: |
       /<command> help (currently not implemented)
@@ -21,13 +21,17 @@ commands:
       /<command> sethome <label> --Sets a home to the given label.
       /<command> delhome <label> --removes home with the given label from your homes.
   sgadmin: 
-    description: skygrid admin commands.
+    description: SkyGrid's Admin commands.
     aliases: [sga, lezkygridadmin, lezskygridadmin]
     usage: |
-      /<command> (SaveChest|SaveBrewStand) (Common|Uncommon|Rare)
-          Saves the contents of the chest you're looking at to the referenced Loot Table.
+      Player Only commands:
       /<command> LoadChest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
           Loads the referenced loot table into the chest you're looking at.  WARNING: Current chest contents will be deleted!
+      /<command> (SaveChest|SaveBrewStand) (Common|Uncommon|Rare)
+          Saves the contents of the chest you're looking at to the referenced Loot Table.
+      /<command> setspawn --Sets the Skygrid world spawn to where you're standing.
+      ServerConsole Capable Commands:
+      /<command> randomLoc <Name> --send named player to a random block in the SkyGrid world.
       /<command> reload --Reloads configs from file.
       /<command> resetconfigs --Resets all config files to defaults
-      /<command> setspawn --Sets the Skygrid world spawn to where you're standing.
+      /<command> spawn <Name> --send named player to the SkyGrid world spawn.
