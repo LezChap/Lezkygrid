@@ -52,3 +52,10 @@ A remake of the SkyGrid-style plugins, updated for Spigot 1.9.2.  To make a worl
 - [ASkyBlock](http://dev.bukkit.org/bukkit-plugins/skyblock/) by @[tastybento](https://github.com/tastybento) (Feature inspiration, ideas on the program-flow to make features work...I've done my best to not steal code, and used tastybento's code as inspiration and then wrote in my own style.)
 - [Ultimate SkyGrid](http://dev.bukkit.org/bukkit-plugins/ultimate-skygrid/) by MadArkael.  (Most recent SkyGrid plugin I could find, and I tried to stay faithful to making a similar user end product when coding my plugin.)
 - The Spigot and Bukkit forums, and the posts on them without which I'd not have figured most of this out.
+
+This project uses and distributes the following libaries, unmodified:  
+**Apache Commons IO**  
+Copyright 2002-2012 The Apache Software Foundation  
+  
+This product includes software developed by  
+The Apache Software Foundation (http://www.apache.org/).  
