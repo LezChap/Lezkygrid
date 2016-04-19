@@ -48,8 +48,8 @@ A remake of the SkyGrid-style plugins, updated for Spigot 1.9.2.  To make a worl
 - [ ] API other plugins can access
 - Want to add something to this list?  Post a feature request on the GitHub.
 
-## Shout Outs and Recognitions:
-- [ASkyBlock](http://dev.bukkit.org/bukkit-plugins/skyblock/) by @[tastybento](https://github.com/tastybento) (Feature inspiration, ideas on the program-flow to make features work...I've done my best to not steal code, and used tastybento's code as inspiration and then wrote in my own style.)
+#### Shout Outs and Recognitions:
+- [ASkyBlock](http://dev.bukkit.org/bukkit-plugins/skyblock/) by @[tastybento](https://github.com/tastybento) (Feature inspiration, ideas on the program-flow to make features work...I've done my best to not steal code, and used tastybento's code as inspiration and then wrote in my own style.)  Somehow I missed tastybento's SkyGrid fork: [ASkyGrid](https://github.com/tastybento/askygrid), so also adding it to this list of inspirational plugins.
 - [Ultimate SkyGrid](http://dev.bukkit.org/bukkit-plugins/ultimate-skygrid/) by MadArkael.  (Most recent SkyGrid plugin I could find, and I tried to stay faithful to making a similar user end product when coding my plugin.)
 - The Spigot and Bukkit forums, and the posts on them without which I'd not have figured most of this out.
 
