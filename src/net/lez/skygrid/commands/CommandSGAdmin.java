@@ -13,7 +13,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.command.Command;
@@ -22,6 +21,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import net.lez.skygrid.Main;
+import net.lez.skygrid.utils.Util;
 
 public class CommandSGAdmin implements CommandExecutor {
     private final Main plugin;
@@ -66,10 +66,13 @@ public class CommandSGAdmin implements CommandExecutor {
                 sender.sendMessage("Teleporting " + p.getName() + " to SkyGrid's world spawn.");
                 p.sendMessage("Server console was directed to teleport you to the SkyGrid world's spawn.");
                 World world = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName"));
-                if (!world.isChunkLoaded(world.getSpawnLocation().getChunk())) {
-                    world.loadChunk(world.getSpawnLocation().getChunk());
+                Location loc = world.getSpawnLocation();
+                loc.setX(loc.getX() + 0.5d);
+                loc.setZ(loc.getZ() + 0.5d);
+                if (!world.isChunkLoaded(loc.getChunk())) {
+                    world.loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
                 }
-                p.teleport(world.getSpawnLocation());
+                p.teleport(loc);
                 return true;
             }
             
@@ -78,28 +81,31 @@ public class CommandSGAdmin implements CommandExecutor {
                 Random rand = new Random();
                 int xDist = rand.nextInt(Math.round((plugin.getConfig().getInt("SpawnRadius.x") / 4)));
                 int zDist = rand.nextInt(Math.round(plugin.getConfig().getInt("SpawnRadius.z") / 4));
-                double yCoord = (double) (plugin.getConfig().getInt("SpawnHeight.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeight.Max") - plugin.getConfig().getInt("SpawnHeight.Min")));
+                double yCoord = (double) (plugin.getConfig().getInt("SpawnHeights.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeights.Max") - plugin.getConfig().getInt("SpawnHeights.Min")));
                 if (rand.nextBoolean()) { xDist = -xDist; }
                 if (rand.nextBoolean()) { zDist = -zDist; }
-                xDist = xDist * 4;
-                zDist = zDist * 4;
-                Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist, yCoord, (double) spawn.getBlockZ() + zDist);
-                loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
-                for (int i = 0; i < 8; i++) {
-                    Block testBlock = loc.getBlock().getRelative(BlockFace.DOWN);
-                    if (testBlock.isEmpty() || testBlock.isLiquid()) {
-                        loc.setY(loc.getY() + 1);
-                    } else {
+                xDist = (xDist * 4);
+                zDist = (zDist * 4);
+                Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist + 0.5d, yCoord + 0.4d, (double) spawn.getBlockZ() + zDist + 0.5d);
+                
+                if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
+                    loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
+                }
+                for (int y = loc.getBlockY(); y < 255; y++) {
+                    Location tmp = new Location(loc.getWorld(), loc.getX(), y, loc.getZ());
+                    if (Util.isSafeLoc(tmp, false)) {
+                        loc = tmp;
                         break;
                     }
                 }
-                Block b = loc.getBlock().getRelative(BlockFace.DOWN);
-                if (b.isEmpty() || b.isLiquid()) {
-                    sender.sendMessage("Could not find a solid teleport location.  Please try again.");
+                
+                if (!Util.isSafeLoc(loc, false)) {
+                    sender.sendMessage("Could not find a safe teleport location.  Please try again.");
                     return true;
                 }
-                sender.sendMessage("Finding and teleporting " + p.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
+                sender.sendMessage("Teleporting " + p.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
                 p.sendMessage("Server console was directed to teleport you to a random block in the SkyGrid world.");
+                Util.makeTempCage(loc, 20);
                 if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
                     loc.getWorld().loadChunk(loc.getChunk());
                 }
@@ -171,10 +177,13 @@ public class CommandSGAdmin implements CommandExecutor {
             sender.sendMessage("Teleporting " + p2.getName() + " to SkyGrid's world spawn.");
             p2.sendMessage("SkyGrid Admin directed to teleport you to the SkyGrid world's spawn.");
             World world = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName"));
-            if (!world.isChunkLoaded(world.getSpawnLocation().getChunk())) {
-                world.loadChunk(world.getSpawnLocation().getChunk());
+            Location loc = world.getSpawnLocation();
+            loc.setX(loc.getX() + 0.5d);
+            loc.setZ(loc.getZ() + 0.5d);
+            if (!world.isChunkLoaded(loc.getChunk())) {
+                world.loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
             }
-            p2.teleport(world.getSpawnLocation());
+            p2.teleport(loc);
             return true;
         }
         
@@ -188,28 +197,32 @@ public class CommandSGAdmin implements CommandExecutor {
             Random rand = new Random();
             int xDist = rand.nextInt(Math.round((plugin.getConfig().getInt("SpawnRadius.x") / 4)));
             int zDist = rand.nextInt(Math.round(plugin.getConfig().getInt("SpawnRadius.z") / 4));
-            double yCoord = (double) (plugin.getConfig().getInt("SpawnHeight.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeight.Max") - plugin.getConfig().getInt("SpawnHeight.Min")));
+            double yCoord = (double) (plugin.getConfig().getInt("SpawnHeights.Min") + rand.nextInt(plugin.getConfig().getInt("SpawnHeights.Max") - plugin.getConfig().getInt("SpawnHeights.Min")));
             if (rand.nextBoolean()) { xDist = -xDist; }
             if (rand.nextBoolean()) { zDist = -zDist; }
             xDist = xDist * 4;
             zDist = zDist * 4;
-            Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist, yCoord, (double) spawn.getBlockZ() + zDist);
-            loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
-            for (int i = 0; i < 8; i++) {
-                Block testBlock = loc.getBlock().getRelative(BlockFace.DOWN);
-                if (testBlock.isEmpty() || testBlock.isLiquid()) {
-                    loc.setY(loc.getY() + 1);
-                } else {
+            Location loc = new Location(spawn.getWorld(), (double) spawn.getBlockX() + xDist + 0.5d, yCoord + 0.4d, (double) spawn.getBlockZ() + zDist + 0.5d);
+
+            if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
+                loc.getWorld().loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
+            }
+            for (int y = loc.getBlockY(); y < 255; y++) {
+                Location tmp = new Location(loc.getWorld(), loc.getX(), y, loc.getZ());
+                if (Util.isSafeLoc(tmp, false)) {
+                    loc = tmp;
                     break;
                 }
             }
-            Block b = loc.getBlock().getRelative(BlockFace.DOWN);
-            if (b.isEmpty() || b.isLiquid()) {
-                sender.sendMessage("Could not find a solid teleport location.  Please try again.");
+            
+            if (!Util.isSafeLoc(loc, false)) {
+                sender.sendMessage("Could not find a safe teleport location.  Please try again.");
                 return true;
             }
-            sender.sendMessage("Finding and teleporting " + p2.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
+            
+            sender.sendMessage("Teleporting " + p2.getName() + " to a random location within the configuration radius of: " + plugin.getConfig().getInt("SpawnRadius.x") + ", " + plugin.getConfig().getInt("SpawnRadius.x") + ".");
             p2.sendMessage("SkyGrid Admin directed to teleport you to a random block in the SkyGrid world.");
+            Util.makeTempCage(loc, 20);
             if (!loc.getWorld().isChunkLoaded(loc.getChunk())) {
                 loc.getWorld().loadChunk(loc.getChunk());
             }

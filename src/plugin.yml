@@ -15,7 +15,7 @@ commands:
       /<command> help (currently not implemented)
       /<command> home --if only home is labeled "home", teleports you there, otherwise lists homes.
       /<command> home <label> --teleports you to the labeled home location.
-      /<command> randomLoc --Teleports you to a random block in the configurated radius.  This location will be solid, but may still hurt you (ex: cactus).
+      /<command> randomLoc --Teleports you to a random block in the configurated radius.  You may visually glitch for a second while the world loads, and are in an invisible cage for 20 ticks.
       /<command> spawn -- Teleports you to Skygrid's world spawn.
       /<command> sethome --if no homes are set, creates a home labeled "home"
       /<command> sethome <label> --Sets a home to the given label.
