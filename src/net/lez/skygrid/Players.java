@@ -94,6 +94,9 @@ public class Players {
         if (getHomeCount() < plugin.getConfig().getInt("MaxHomes")) {
             return true;
         }
+        if (plugin.getServer().getPlayer(uuid).hasPermission("lezkygrid.skygrid.sethome.unlimited")){
+            return true;
+        }
         return false;
     }
 

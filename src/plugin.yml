@@ -20,6 +20,30 @@ commands:
       /<command> sethome --if no homes are set, creates a home labeled "home"
       /<command> sethome <label> --Sets a home to the given label.
       /<command> delhome <label> --removes home with the given label from your homes.
+  skygrid home:
+    description: Teleports you to your saved home location(s).
+    aliases: [sg home, lezkygrid home, lezskygrid home]
+    usage:  |
+      /<command> home --get list of saved homes
+      /<command> home <label> --teleports you to the labeled home location.
+  skygrid randomLoc:
+    description: Teleports you to a random location in the SkyGrid world.
+    aliases: [sg randomloc, lezkygrid randomloc, lezskygrid randomloc]
+    usage: /<command> randomLoc
+  skygrid spawn:
+    description: Teleports you to the SkyGrid World Spawnpoint.
+    aliases: [sg spawn, lezkygrid spawn, lezskygrid spawn]
+    usage: /<command> spawn
+  skygrid sethome:
+    description: Save a home location.
+    aliases: [sg sethome, lezkygrid sethome, lezskygrid sethome]
+    usage: |
+      /<command> sethome --if no homes are set, save a home with the label: home
+      /<command> sethome <label> --save current location to the given home label.
+  skygrid delhome:
+    description: Delete a saved home location.
+    aliases: [sg delhome, lezkygrid delhome, lezskygrid delhome]
+    usage: /<command> delhome <label>
   sgadmin: 
     description: SkyGrid's Admin commands.
     aliases: [sga, lezkygridadmin, lezskygridadmin]
@@ -35,3 +59,125 @@ commands:
       /<command> reload --Reloads configs from file.
       /<command> resetconfigs --Resets all config files to defaults
       /<command> spawn <Name> --send named player to the SkyGrid world spawn.
+  sgadmin loadchest: 
+    description: Load a loot table to the chest you're looking at.  (Player-only)
+    aliases: [sga loadchest, lezkygridadmin loadchest, lezskygridadmin loadchest]
+    usage: |
+      /<command> loadchest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
+           Loads the loot table for Chests or Brewing Stands of the given rarity.
+  sgadmin savechest: 
+    description: Save the contents of the chest you're looking at to the Loot Tables of the given rarity.  (Player-only)
+    aliases: [sga savechest, lezkygridadmin savechest, lezskygridadmin savechest]
+    usage: /<command> savechest (Common|Uncommon|Rare)
+  sgadmin savebrewstand: 
+    description: Save the contents of the chest you're looking at to the BrewStand Loot Tables of the given rarity. (Player-only)
+    aliases: [sga savebrewstand, lezkygridadmin savebrewstand, lezskygridadmin savebrewstand]
+    usage: /<command> savebrewstand (Common|Uncommon|Rare)
+  sgadmin setspawn: 
+    description: Sets the worldspawn to your present location (Player-only)
+    aliases: [sga setspawn, lezkygridadmin setspawn, lezskygridadmin setspawn]
+    usage: /<command> setspawn
+  sgadmin randomloc: 
+    description: Teleport a user to a random location in the SkyGrid World.
+    aliases: [sga randomloc, lezkygridadmin randomloc, lezskygridadmin randomloc]
+    usage: /<command> randomloc <PlayerName>
+  sgadmin reload: 
+    description: Reload the plugin's configs from file.
+    aliases: [sga reload, lezkygridadmin reload, lezskygridadmin reload]
+    usage: /<command> reload
+  sgadmin resetconfigs: 
+    description: Reset the configs on the server to default values.
+    aliases: [sga resetconfigs, lezkygridadmin resetconfigs, lezskygridadmin resetconfigs]
+    usage: /<command> resetconfigs
+  sgadmin spawn: 
+    description: Teleport a player to the SkyGrid World Spawnpoint.
+    aliases: [sga spawn, lezkygridadmin spawn, lezskygridadmin spawn]
+    usage: /<command> spawn <PlayerName>    
+      
+      
+permissions:
+    lezkygrid.*:
+        description: Gives permissions to all commands and features in Lezkygrid
+        default: op
+        children:
+            lezkygrid.all: true
+    lezkygrid.all:
+        description: Gives permissions to all commands and features in Lezkygrid
+        default: op
+        children:
+            lezkygrid.skygrid.*: true
+            lezkygrid.sgadmin.*: true
+    lezkygrid.skygrid.*:
+        description: Gives permissions to the /skygrid command, and all sub-commands.
+        default: true
+        children:
+            lezkygrid.skygrid.all: true
+    lezkygrid.skygrid.all:
+        description: Gives permissions to the /skygrid command, and all sub-commands.
+        default: true
+        children: 
+            lezkygrid.skygrid.home: true
+            lezkygrid.skygrid.randomloc: true
+            lezkygrid.skygrid.spawn: true
+            lezkygrid.skygrid.sethome: true
+            lezkygrid.skygrid.sethome.unlimited: false
+            lezkygrid.skygrid.delhome: true
+    lezkygrid.skygrid.home:
+        description: Allows use of /skygrid home to teleport to saved home coordinates.
+        default: true
+    lezkygrid.skygrid.randomloc:
+        description: Allows user to teleport to a random location in the Skygrid world.
+        default: true
+    lezkygrid.skygrid.spawn:
+        description: Allows user to teleport to the SkyGrid world spawnpoint.
+        default: true
+    lezkygrid.skygrid.sethome:
+        description: Allows user to use the /skygrid sethome command to save home locations.
+        default: true    
+    lezkygrid.skygrid.sethome.unlimited:
+        description: Allows user to set unlimited homes with /skygrid sethome.
+        default: false
+    lezkygrid.skygrid.delhome:
+        description: Allows user to remove saved homes via /skygrid delhome command.
+        default: true
+    lezkygrid.sgadmin.*:
+        description: Allows access to the /sgadmin command and sub commands for admin use.
+        default: op
+        children:
+            lezkygrid.sgadmin.all: true
+    lezkygrid.sgadmin.all:
+        description: Allows you to see how many times others have burned to deathAllows access to the /sgadmin command and sub commands for admin use.
+        default: op
+        children:
+            lezkygrid.sgadmin.loadchest: true
+            lezkygrid.sgadmin.savechest: true
+            lezkygrid.sgadmin.savebrewstand: true
+            lezkygrid.sgadmin.setspawn: true
+            lezkygrid.sgadmin.spawn: true
+            lezkygrid.sgadmin.randomloc: true
+            lezkygrid.sgadmin.reload: true
+            lezkygrid.sgadmin.resetconfigs: true
+    lezkygrid.sgadmin.loadchest:
+        description: Allows the /sga loadchest subcommand, loading one of the loot tables into a chest.
+        default: op
+    lezkygrid.sgadmin.savechest:
+        description: Allows the /sga savechest subcommand, saving the contents of a chest to the loot tables.
+        default: op
+    lezkygrid.sgadmin.savebrewstand:
+        description: Allows the /sga savebrewstand subcommand, saving the chest contents to the loot tables.
+        default: op
+    lezkygrid.sgadmin.setspawn:
+        description: Allows the setting of the SkyGrid World Spawnpoint.
+        default: op
+    lezkygrid.sgadmin.spawn:
+        description: Allows the teleportation of another user to spawn.
+        default: op
+    lezkygrid.sgadmin.randomloc:
+        description: Allows the teleportation of another user to a random location.
+        default: op
+    lezkygrid.sgadmin.reload:
+        description: Reload SkyGrid configs from file.
+        default: op
+    lezkygrid.sgadmin.resetconfigs:
+        description: Replaces the config files with defaults from the jar.
+        default: op

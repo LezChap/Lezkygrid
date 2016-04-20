@@ -30,9 +30,97 @@ A remake of the SkyGrid-style plugins, updated for Spigot 1.9.2.  To make a worl
       /sgadmin reload --Reloads configs from file.
       /sgadmin resetconfigs --Resets all config files to defaults
       /sgadmin spawn <Name> --send named player to the SkyGrid world spawn.
-```      
+```
+## SkyGrid's Permission Nodes
+```
+lezkygrid.*:
+        description: Gives permissions to all commands and features in Lezkygrid
+        default: op
+        children:
+            lezkygrid.all: true
+    lezkygrid.all:
+        description: Gives permissions to all commands and features in Lezkygrid
+        default: op
+        children:
+            lezkygrid.skygrid.*: true
+            lezkygrid.sgadmin.*: true
+    lezkygrid.skygrid.*:
+        description: Gives permissions to the /skygrid command, and all sub-commands.
+        default: true
+        children:
+            lezkygrid.skygrid.all: true
+    lezkygrid.skygrid.all:
+        description: Gives permissions to the /skygrid command, and all sub-commands.
+        default: true
+        children: 
+            lezkygrid.skygrid.home: true
+            lezkygrid.skygrid.randomloc: true
+            lezkygrid.skygrid.spawn: true
+            lezkygrid.skygrid.sethome: true
+            lezkygrid.skygrid.sethome.unlimited: false
+            lezkygrid.skygrid.delhome: true
+    lezkygrid.skygrid.home:
+        description: Allows use of /skygrid home to teleport to saved home coordinates.
+        default: true
+    lezkygrid.skygrid.randomloc:
+        description: Allows user to teleport to a random location in the Skygrid world.
+        default: true
+    lezkygrid.skygrid.spawn:
+        description: Allows user to teleport to the SkyGrid world spawnpoint.
+        default: true
+    lezkygrid.skygrid.sethome:
+        description: Allows user to use the /skygrid sethome command to save home locations.
+        default: true    
+    lezkygrid.skygrid.sethome.unlimited:
+        description: Allows user to set unlimited homes with /skygrid sethome.
+        default: false
+    lezkygrid.skygrid.delhome:
+        description: Allows user to remove saved homes via /skygrid delhome command.
+        default: true
+    lezkygrid.sgadmin.*:
+        description: Allows access to the /sgadmin command and sub commands for admin use.
+        default: op
+        children:
+            lezkygrid.sgadmin.all: true
+    lezkygrid.sgadmin.all:
+        description: Allows you to see how many times others have burned to deathAllows access to the /sgadmin command and sub commands for admin use.
+        default: op
+        children:
+            lezkygrid.sgadmin.loadchest: true
+            lezkygrid.sgadmin.savechest: true
+            lezkygrid.sgadmin.savebrewstand: true
+            lezkygrid.sgadmin.setspawn: true
+            lezkygrid.sgadmin.spawn: true
+            lezkygrid.sgadmin.randomloc: true
+            lezkygrid.sgadmin.reload: true
+            lezkygrid.sgadmin.resetconfigs: true
+    lezkygrid.sgadmin.loadchest:
+        description: Allows the /sga loadchest subcommand, loading one of the loot tables into a chest.
+        default: op
+    lezkygrid.sgadmin.savechest:
+        description: Allows the /sga savechest subcommand, saving the contents of a chest to the loot tables.
+        default: op
+    lezkygrid.sgadmin.savebrewstand:
+        description: Allows the /sga savebrewstand subcommand, saving the chest contents to the loot tables.
+        default: op
+    lezkygrid.sgadmin.setspawn:
+        description: Allows the setting of the SkyGrid World Spawnpoint.
+        default: op
+    lezkygrid.sgadmin.spawn:
+        description: Allows the teleportation of another user to spawn.
+        default: op
+    lezkygrid.sgadmin.randomloc:
+        description: Allows the teleportation of another user to a random location.
+        default: op
+    lezkygrid.sgadmin.reload:
+        description: Reload SkyGrid configs from file.
+        default: op
+    lezkygrid.sgadmin.resetconfigs:
+        description: Replaces the config files with defaults from the jar.
+        default: op
+```
 ## Ideas, To-Dos, Goals and Pipedreams:
-- [ ] Permission Nodes
+- [X] Permission Nodes
 - [ ] Economy Support?
 - [ ] Random Teleport Delay
 - [ ] Region Claiming and Protection

@@ -18,6 +18,7 @@ public class CommandSkygrid implements CommandExecutor {
     private final Main plugin;
     @SuppressWarnings("unused")
     private final Logger logger = Bukkit.getLogger();
+    private final String noPerm = "You don't have permissions to run this command.";
     
     public CommandSkygrid(Main plugin) {
         this.plugin = plugin;
@@ -27,7 +28,7 @@ public class CommandSkygrid implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Invalid command, this command cannot be run from the console.");
+            sender.sendMessage("This command cannot be run from the console.");
             return false;
         }
         
@@ -39,6 +40,10 @@ public class CommandSkygrid implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("spawn")) {
+            if (!p.hasPermission("lezkygrid.skygrid.spawn")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             sender.sendMessage("Taking you to SkyGrid Spawn!");
             World world = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName"));
             Location loc = world.getSpawnLocation();
@@ -52,6 +57,10 @@ public class CommandSkygrid implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("randomLoc")) {
+            if (!p.hasPermission("lezkygrid.skygrid.randomloc")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             Location spawn = plugin.getServer().getWorld(plugin.getConfig().getString("WorldName")).getSpawnLocation();
             Random rand = new Random();
             int xDist = rand.nextInt(Math.round((plugin.getConfig().getInt("SpawnRadius.x") / 4)));
@@ -87,6 +96,10 @@ public class CommandSkygrid implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("sethome")) {
+            if (!p.hasPermission("lezkygrid.skygrid.sethome")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             Location loc = p.getLocation();
             if (!(loc.getWorld().getName().equalsIgnoreCase(plugin.getConfig().getString("WorldName")))) {
                 sender.sendMessage("Can only make a home location in the SkyGrid world: " + plugin.getConfig().getString("WorldName"));
@@ -119,6 +132,10 @@ public class CommandSkygrid implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("delhome")) {
+            if (!p.hasPermission("lezkygrid.skygrid.delhome")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             if (args.length <= 1 || args[1].isEmpty() || args[1]==null) {
                 sender.sendMessage("Please input a home to remove.  (/skygrid delhome <label>)");
                 return true;
@@ -135,6 +152,10 @@ public class CommandSkygrid implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("home")) {
+            if (!p.hasPermission("lezkygrid.skygrid.home")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             if (args.length <= 1 || args[1].isEmpty() || args[1]==null) {
                 if (plugin.getPlayers().isHome(p.getUniqueId(), "home") && plugin.getPlayers().getHomeCount(p.getUniqueId()) == 1) {
                     sender.sendMessage("Teleporting you to your home location.");

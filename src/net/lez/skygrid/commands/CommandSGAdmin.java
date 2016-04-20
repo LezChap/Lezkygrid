@@ -26,6 +26,8 @@ import net.lez.skygrid.utils.Util;
 public class CommandSGAdmin implements CommandExecutor {
     private final Main plugin;
     private final Logger logger = Bukkit.getLogger();
+    private final String noPerm = "You don't have permissions to run this command.";
+
     
     public CommandSGAdmin(Main plugin) {
         this.plugin = plugin;
@@ -123,6 +125,10 @@ public class CommandSGAdmin implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("setspawn")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.setspawn")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             Location newSpawn = p.getLocation();
             if (newSpawn.getWorld().getName().equalsIgnoreCase(plugin.getConfig().getString("WorldName"))) {
                 newSpawn.getWorld().setSpawnLocation(newSpawn.getBlockX(), newSpawn.getBlockY(), newSpawn.getBlockZ());
@@ -135,12 +141,20 @@ public class CommandSGAdmin implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("reload")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.reload")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             plugin.loadConfigs();
             sender.sendMessage("Configs Reloaded!");
             return true;
         }
         
         if (args[0].equalsIgnoreCase("resetconfigs")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.resetconfigs")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             plugin.resetToDefaults();
             sender.sendMessage("Configs reset to default, and reloaded!");
             return true;
@@ -169,6 +183,10 @@ public class CommandSGAdmin implements CommandExecutor {
         }        
         
         if (args[0].equalsIgnoreCase("spawn")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.spawn")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             Player p2 = plugin.getServer().getPlayer(args[1]);
             if ((p2 == null) || !p2.isOnline()) {
                 sender.sendMessage("Player offline or otherwise invalid.");
@@ -188,6 +206,10 @@ public class CommandSGAdmin implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("randomLoc")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.randomloc")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             Player p2 = plugin.getServer().getPlayer(args[1]);
             if ((p2 == null) || !p2.isOnline()) {
                 sender.sendMessage("Player offline or otherwise invalid.");
@@ -231,6 +253,10 @@ public class CommandSGAdmin implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("savechest")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.savechest")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             String path = "ChestLoot.";
             switch(args[1].toUpperCase()) {
                 case "COMMON":
@@ -262,6 +288,10 @@ public class CommandSGAdmin implements CommandExecutor {
             return true;
             
         } else if (args[0].equalsIgnoreCase("savebrewstand")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.savebrewstand")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             String path = "BrewingStandLoot.";
             switch(args[1].toUpperCase()) {
                 case "COMMON":
@@ -297,6 +327,10 @@ public class CommandSGAdmin implements CommandExecutor {
         }
         
         if (args[0].equalsIgnoreCase("loadchest")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.loadchest")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
             String path;
             if (args[1].equalsIgnoreCase("ChestLoot")) {
                 path = "ChestLoot.";
