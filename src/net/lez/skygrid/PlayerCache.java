@@ -14,12 +14,13 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitScheduler;
+
 import com.google.common.collect.ImmutableList;
 
 public class PlayerCache {
     private Main plugin;
     private HashMap<UUID, Players> playerCache = new HashMap<UUID, Players>();
-    @SuppressWarnings("unused")
     private Logger logger = Bukkit.getLogger();
 
     public PlayerCache(Main plugin) {
@@ -30,6 +31,15 @@ public class PlayerCache {
                 this.playerCache.put(p.getUniqueId(), playerTmp);
             }
         }
+        long repeatDelay = plugin.getConfig().getLong("AutosavePeriod", 5) * 60 * 20;
+        BukkitScheduler scheduler = plugin.getServer().getScheduler();
+        scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                logger.info("Saving SkyGrid player data...may have a moment of lag.");
+                plugin.getPlayers().saveAll();
+            }
+        }, repeatDelay, repeatDelay);
     }
     
     public static List<Player> getOnlinePlayers() {

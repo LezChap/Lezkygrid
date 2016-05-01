@@ -131,7 +131,7 @@ lezkygrid.*:
 ```
 ## Ideas, To-Dos, Goals and Pipedreams:
 - [X] Permission Nodes
-- [ ] Auto-saving playerfiles on interval (5 min?)
+- [X] Auto-saving playerfiles on interval (5 min?)
 - [ ] Economy Support?
 - [ ] Random Teleport Delay
 - [ ] Region Claiming and Protection

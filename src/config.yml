@@ -16,6 +16,9 @@ SpawnHeights:
 ## This is how many homes players can set via the mod.    
 MaxHomes: 3
 
+## How long between autosaving player data, in minutes
+AutosavePeriod: 5
+
 ## BlockLists are a list of blocks of each rarity, based on Spigot's Material Enums 
 ## (https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
 ## Every listed item must be a placeable block that matches the Enum, or it
