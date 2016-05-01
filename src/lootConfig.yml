@@ -434,3 +434,13 @@ BrewingStandLoot:
   - ==: org.bukkit.inventory.ItemStack
     type: GLOWSTONE_DUST
     amount: 10
+StartingInventory:
+- ==: org.bukkit.inventory.ItemStack
+  type: COBBLESTONE
+  amount: 64
+- ==: org.bukkit.inventory.ItemStack
+  type: COBBLESTONE
+  amount: 64
+- ==: org.bukkit.inventory.ItemStack
+  type: TORCH
+  amount: 12

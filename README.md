@@ -24,12 +24,14 @@ A remake of the SkyGrid-style plugins, updated for Spigot 1.9.2.  To make a worl
           Loads the referenced loot table into the chest you're looking at.  WARNING: Current chest contents will be deleted!
       /sgadmin (SaveChest|SaveBrewStand) (Common|Uncommon|Rare)
           Saves the contents of the chest you're looking at to the referenced Loot Table.
-      /sgadmin setspawn --Sets the Skygrid world spawn to where you're standing.
-      ****ServerConsole Capable Commands:****
-      /sgadmin randomLoc <Name> --send named player to a random block in the SkyGrid world.
-      /sgadmin reload --Reloads configs from file.
-      /sgadmin resetconfigs --Resets all config files to defaults
-      /sgadmin spawn <Name> --send named player to the SkyGrid world spawn.
+      /sgadmin LoadStartInv --loads the default starting inventory into your inventory.
+      /sgadmin SaveStartInv --saves the default starting inventory to configs (from your inventory)
+	  /sgadmin setspawn --Sets the Skygrid world spawn to where you're standing.
+	  ****ServerConsole Capable Commands:****
+	  /sgadmin randomLoc <Name> --send named player to a random block in the SkyGrid world.
+	  /sgadmin reload --Reloads configs from file.
+	  /sgadmin resetconfigs --Resets all config files to defaults
+	  /sgadmin spawn <Name> --send named player to the SkyGrid world spawn.
 ```
 ## SkyGrid's Permission Nodes
 ```
@@ -87,13 +89,21 @@ lezkygrid.*:
         default: op
         children:
             lezkygrid.sgadmin.loadchest: true
+            lezkygrid.sgadmin.savestartinv: true
             lezkygrid.sgadmin.savechest: true
             lezkygrid.sgadmin.savebrewstand: true
+            lezkygrid.sgadmin.savestartinv: true
             lezkygrid.sgadmin.setspawn: true
             lezkygrid.sgadmin.spawn: true
             lezkygrid.sgadmin.randomloc: true
             lezkygrid.sgadmin.reload: true
             lezkygrid.sgadmin.resetconfigs: true
+    lezkygrid.sgadmin.loadstartinv:
+        description: Allows the /sga loadstartinv subcommand, loading the default starting inventory into the current player's inventory.
+        default: op
+    lezkygrid.sgadmin.savestartinv:
+        description: Allows th /sga savestartinv subcommand, saving the current player's inventory into the configs for default starting inventory.
+        default: op
     lezkygrid.sgadmin.loadchest:
         description: Allows the /sga loadchest subcommand, loading one of the loot tables into a chest.
         default: op
@@ -121,16 +131,17 @@ lezkygrid.*:
 ```
 ## Ideas, To-Dos, Goals and Pipedreams:
 - [X] Permission Nodes
+- [ ] Auto-saving playerfiles on interval (5 min?)
 - [ ] Economy Support?
 - [ ] Random Teleport Delay
 - [ ] Region Claiming and Protection
 - [ ] Coop/team play
 - [ ] Challenges
-- [ ] Configurable initial inventory
+- [X] Configurable initial inventory
 - [ ] Scoring/Top Scoreboard
 - [ ] Nether/End worlds and integrtation
 - [ ] Auto worldgeneration (on First Enable?)
-- [ ] Default Spawn island?
+- [ ] Default Spawn island? - Schematic?
 - [ ] Localizations --Will need translators once implemented, I only know English.
 - [ ] More configuration options for worldgen/loot tables
 - [ ] API other plugins can access

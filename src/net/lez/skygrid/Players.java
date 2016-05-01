@@ -17,7 +17,7 @@ import net.lez.skygrid.utils.Util;
 public class Players {
     private Main plugin;
     private UUID uuid;
-    private boolean hasSpawn;
+    private boolean hasSpawned;
     private TreeMap<String, Location> homeLocs;
     private String playerName;
     private YamlConfiguration playerData;
@@ -27,7 +27,7 @@ public class Players {
     public Players(Main plugin, UUID uuid) {
         this.plugin = plugin;
         this.uuid = uuid;
-        this.hasSpawn = false;
+        this.hasSpawned = false;
         this.homeLocs = new TreeMap<String, Location>();
         this.playerName = "";
         
@@ -51,7 +51,7 @@ public class Players {
             }
         }
         
-        this.hasSpawn = this.playerData.getBoolean("hasSpawn", false);
+        this.hasSpawned = this.playerData.getBoolean("hasSpawned", false);
         
         TreeMap<String, Location> homeList = new TreeMap<String, Location>();
         List<String> HomeNameList = this.playerData.getStringList("HomeNameList");
@@ -63,13 +63,13 @@ public class Players {
         }
     }
 
-    public boolean hasSpawn() {
-        return this.hasSpawn;
+    public boolean hasSpawned() {
+        return this.hasSpawned;
     }
 
     public void save() {
         this.playerData.set("playerName", this.playerName);
-        this.playerData.set("hasSpawn", Boolean.valueOf(this.hasSpawn));
+        this.playerData.set("hasSpawned", Boolean.valueOf(this.hasSpawned));
         
         List<String> HomeNameList = new ArrayList<String>();
         for (String name : homeLocs.keySet()) {
@@ -82,8 +82,8 @@ public class Players {
         Util.saveYamlFile(this.playerData, "players" + File.separator + this.uuid.toString() + ".yml");
     }
 
-    public void setHasSpawn(boolean bool) {
-        this.hasSpawn = bool;       
+    public void setHasSpawned(boolean bool) {
+        this.hasSpawned = bool;       
     }
     
     public int getHomeCount() {

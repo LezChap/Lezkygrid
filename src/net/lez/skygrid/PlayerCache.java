@@ -91,20 +91,20 @@ public class PlayerCache {
         return (Players)this.playerCache.get(uuid);
     }
     
-    public boolean hasSpawn(UUID uuid) {
+    public boolean hasSpawned(UUID uuid) {
         addPlayer(uuid);
-        return ((Players)this.playerCache.get(uuid)).hasSpawn();
+        return ((Players)this.playerCache.get(uuid)).hasSpawned();
     }
     
-    public void setHasSpawn(UUID uuid, boolean bool) {
+    public void setHasSpawned(UUID uuid, boolean bool) {
         addPlayer(uuid);
-        ((Players)this.playerCache.get(uuid)).setHasSpawn(bool);
+        ((Players)this.playerCache.get(uuid)).setHasSpawned(bool);
     }
     
     public void clearPlayerData(UUID uuid) {
         addPlayer(uuid);
         ((Players)this.playerCache.get(uuid)).clearHomeLocs();
-        ((Players)this.playerCache.get(uuid)).setHasSpawn(false);
+        ((Players)this.playerCache.get(uuid)).setHasSpawned(false);
         ((Players)this.playerCache.get(uuid)).save();
     }
     

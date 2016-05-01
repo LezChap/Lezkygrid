@@ -49,22 +49,26 @@ commands:
     aliases: [sga, lezkygridadmin, lezskygridadmin]
     usage: |
       Player Only commands:
+      /<command> LoadStartInv --loads starting inventory into player inventory (clears current inventory)
       /<command> LoadChest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
           Loads the referenced loot table into the chest you're looking at.  WARNING: Current chest contents will be deleted!
       /<command> (SaveChest|SaveBrewStand) (Common|Uncommon|Rare)
           Saves the contents of the chest you're looking at to the referenced Loot Table.
+      /<command> SaveStarInv --saves current inventory to the starting inventory configs
       /<command> setspawn --Sets the Skygrid world spawn to where you're standing.
       ServerConsole Capable Commands:
       /<command> randomLoc <Name> --send named player to a random block in the SkyGrid world.
       /<command> reload --Reloads configs from file.
       /<command> resetconfigs --Resets all config files to defaults
       /<command> spawn <Name> --send named player to the SkyGrid world spawn.
+  sgadmin loadstartinv:
+    description: Loads the default starting inventory into your inventory.  WARNING-Erases your inventory!
+    aliases: [sga loadstartinv, lezkygridadmin loadstartinv, lezskyadmin loadstartinv]
+    usage: /<command> LoadStartInv
   sgadmin loadchest: 
     description: Load a loot table to the chest you're looking at.  (Player-only)
     aliases: [sga loadchest, lezkygridadmin loadchest, lezskygridadmin loadchest]
-    usage: |
-      /<command> loadchest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
-           Loads the loot table for Chests or Brewing Stands of the given rarity.
+    usage: /<command> loadchest (ChestLoot|BrewingStandLoot) (Common|Uncommon|Rare)
   sgadmin savechest: 
     description: Save the contents of the chest you're looking at to the Loot Tables of the given rarity.  (Player-only)
     aliases: [sga savechest, lezkygridadmin savechest, lezskygridadmin savechest]
@@ -73,6 +77,10 @@ commands:
     description: Save the contents of the chest you're looking at to the BrewStand Loot Tables of the given rarity. (Player-only)
     aliases: [sga savebrewstand, lezkygridadmin savebrewstand, lezskygridadmin savebrewstand]
     usage: /<command> savebrewstand (Common|Uncommon|Rare)
+  sgadmin savestartinv:
+    description: Saves default starting inventory from current player inventory into configs.
+    aliases: [sga savestartinv, lezkygridadmin savestartinv, lezskygridadmin savestartinv]
+    usage: /<command> savestartinv
   sgadmin setspawn: 
     description: Sets the worldspawn to your present location (Player-only)
     aliases: [sga setspawn, lezkygridadmin setspawn, lezskygridadmin setspawn]
@@ -150,8 +158,10 @@ permissions:
         default: op
         children:
             lezkygrid.sgadmin.loadchest: true
+            lezkygrid.sgadmin.loadstartinv: true
             lezkygrid.sgadmin.savechest: true
             lezkygrid.sgadmin.savebrewstand: true
+            lezkygrid.sgadmin.savestartinv: true
             lezkygrid.sgadmin.setspawn: true
             lezkygrid.sgadmin.spawn: true
             lezkygrid.sgadmin.randomloc: true
@@ -160,11 +170,17 @@ permissions:
     lezkygrid.sgadmin.loadchest:
         description: Allows the /sga loadchest subcommand, loading one of the loot tables into a chest.
         default: op
+    lezkygrid.sgadmin.loadstartinv:
+        description: Allows the /sga loadstartinv subcommand, loading the default starting inventory into the current player's inventory.
+        default: op
     lezkygrid.sgadmin.savechest:
         description: Allows the /sga savechest subcommand, saving the contents of a chest to the loot tables.
         default: op
     lezkygrid.sgadmin.savebrewstand:
         description: Allows the /sga savebrewstand subcommand, saving the chest contents to the loot tables.
+        default: op
+    lezkygrid.sgadmin.savestartinv:
+        description: Allows th /sga savestartinv subcommand, saving the current player's inventory into the configs for default starting inventory.
         default: op
     lezkygrid.sgadmin.setspawn:
         description: Allows the setting of the SkyGrid World Spawnpoint.

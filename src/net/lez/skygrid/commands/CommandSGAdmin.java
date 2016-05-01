@@ -20,6 +20,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
 import net.lez.skygrid.Main;
 import net.lez.skygrid.utils.Util;
 
@@ -157,6 +159,36 @@ public class CommandSGAdmin implements CommandExecutor {
             }
             plugin.resetToDefaults();
             sender.sendMessage("Configs reset to default, and reloaded!");
+            return true;
+        }
+        
+        if (args[0].equalsIgnoreCase("loadstartinv")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.loadstartinv")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
+            List<?> list = new ArrayList<ItemStack>();
+            list = (ArrayList<?>) plugin.lootConfig.get("StartingInventory");
+            PlayerInventory pi = p.getInventory();
+            pi.clear();
+            ItemStack[] contents;
+            contents = new ItemStack[list.size()];
+            contents = list.toArray(contents);
+            pi.setContents(contents);
+            p.updateInventory();
+            sender.sendMessage("Updated your inventory with the starting inventory from configs.");
+            logger.info(sender.getName() + "Updated their inventory with the starting inventory from configs.");
+            return true;
+        }
+        
+        if (args[0].equalsIgnoreCase("savestartinv")) {
+            if (!p.hasPermission("lezkygrid.sgadmin.savestartinv")) {
+                sender.sendMessage(noPerm);
+                return true;
+            }
+            plugin.lootConfig.set("StartingInventory", getInventoryContents(p));
+            plugin.saveContainerConfig();
+            sender.sendMessage("Saved your inventory to config's default starting inventory.");
             return true;
         }
         
@@ -396,7 +428,7 @@ public class CommandSGAdmin implements CommandExecutor {
         }
     }
     
-    public List<ItemStack> getChestContents(Block block) {
+    private List<ItemStack> getChestContents(Block block) {
         Chest chest = (Chest) block.getState();
         List<ItemStack> contents = new ArrayList<ItemStack>();
         if(chest.getInventory().getHolder() instanceof DoubleChest) {
@@ -406,6 +438,14 @@ public class CommandSGAdmin implements CommandExecutor {
         else {
             contents.addAll(Arrays.asList(chest.getInventory().getContents()));
         }   
+        contents.removeAll(Collections.singleton(null));
+        return contents;
+    }
+    
+    private List<ItemStack> getInventoryContents(Player p) {
+        PlayerInventory pi = p.getInventory();
+        List<ItemStack> contents = new ArrayList<ItemStack>();
+        contents.addAll(Arrays.asList(pi.getContents()));  
         contents.removeAll(Collections.singleton(null));
         return contents;
     }

@@ -1,5 +1,7 @@
 package net.lez.skygrid.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -10,6 +12,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
 import net.lez.skygrid.Main;
 import net.lez.skygrid.utils.Util;
 
@@ -53,6 +58,10 @@ public class CommandSkygrid implements CommandExecutor {
                 world.loadChunk(loc.getChunk().getX(), loc.getChunk().getZ(), true);
             }
             p.teleport(loc);
+            if (!plugin.getPlayers().hasSpawned(p.getUniqueId())) {
+                setStartInv(p);
+                plugin.getPlayers().setHasSpawned(p.getUniqueId(), true);
+            }
             return true;
         }
         
@@ -92,6 +101,10 @@ public class CommandSkygrid implements CommandExecutor {
                 loc.getWorld().loadChunk(loc.getChunk());
             }
             p.teleport(loc);
+            if (!plugin.getPlayers().hasSpawned(p.getUniqueId())) {
+                setStartInv(p);
+                plugin.getPlayers().setHasSpawned(p.getUniqueId(), true);
+            }
             return true;
         }
         
@@ -193,5 +206,17 @@ public class CommandSkygrid implements CommandExecutor {
             }
         }
         return false;
+    }
+    
+    private void setStartInv(Player p) {
+        List<?> list = new ArrayList<ItemStack>();
+        list = (ArrayList<?>) plugin.lootConfig.get("StartingInventory");
+        PlayerInventory pi = p.getInventory();
+        pi.clear();
+        ItemStack[] contents;
+        contents = new ItemStack[list.size()];
+        contents = list.toArray(contents);
+        pi.setContents(contents);
+        p.updateInventory();
     }
 }
