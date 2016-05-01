@@ -2,6 +2,8 @@
 
 A remake of the SkyGrid-style plugins, updated for Spigot 1.9.2.  To make a world, currently you need to use Multiverse (or other multiworld/generating plugin) and select "lezkygrid" as the world generator ("/mvc SkyGrid normal -g lezkygrid" on Multiverse 2.5).  Almost all generated blocks and loot tables can be configured.  If something doesn't work, post an issue so I can look into it.
 
+Binary download available: https://www.spigotmc.org/resources/lezkygrid.22648/
+
 ## Skygrid's Player commands
  ```
     aliases: [skygrid, sg, lezkygrid, lezskygrid]
